@@ -1,0 +1,134 @@
+{
+  "cluster_names": {
+    "Cluster_0": "Mid Other (Remote)",
+    "Cluster_1": "Senior Smart Contract Developer (Remote)",
+    "Cluster_2": "Mid Rust/Solana Developer (Onsite/Hybrid)",
+    "Cluster_3": "Mid Other (Onsite/Hybrid)",
+    "Cluster_4": "Mid Security/Auditor (Onsite/Hybrid)"
+  },
+  "cluster_analysis": {
+    "Cluster_0": {
+      "size": 272,
+      "percentage": 63.8,
+      "top_job_types": {
+        "Other": 68,
+        "Product Manager": 42,
+        "Marketing/Growth": 38,
+        "Designer": 21,
+        "Blockchain Developer": 17
+      },
+      "seniority_dist": {
+        "Mid": 149,
+        "Senior": 75,
+        "Lead": 40,
+        "Junior": 8
+      },
+      "remote_ratio": 73.2,
+      "top_countries": {
+        "Remote": 199,
+        "Other": 53,
+        "India": 4,
+        "Brazil": 4,
+        "Canada": 4
+      },
+      "sample_titles": [
+        "Head of Product and UX",
+        "Senior Brand & Design Systems Lead",
+        "Senior Visual Designer",
+        "Chief Executive Officer (CEO)",
+        "ZIGChain Blockchain Engineer"
+      ]
+    },
+    "Cluster_1": {
+      "size": 2,
+      "percentage": 0.5,
+      "top_job_types": {
+        "Smart Contract Developer": 2
+      },
+      "seniority_dist": {
+        "Senior": 2
+      },
+      "remote_ratio": 100.0,
+      "top_countries": {
+        "Remote": 2
+      },
+      "sample_titles": [
+        "Senior Smart Contract & Backend Developer (Solidity, TypeScript)",
+        "Senior Smart Contract Backend Developer Solidity TypeScript"
+      ]
+    },
+    "Cluster_2": {
+      "size": 4,
+      "percentage": 0.9,
+      "top_job_types": {
+        "Rust/Solana Developer": 4
+      },
+      "seniority_dist": {
+        "Mid": 4
+      },
+      "remote_ratio": 25.0,
+      "top_countries": {
+        "USA": 2,
+        "UK": 1,
+        "Remote": 1
+      },
+      "sample_titles": [
+        "Solana Program Engineer",
+        "Solana Program Engineer",
+        "Rust Blockchain Developer Solana",
+        "Solana PERP DEX: Superis Labs Software Engineer Backend"
+      ]
+    },
+    "Cluster_3": {
+      "size": 146,
+      "percentage": 34.3,
+      "top_job_types": {
+        "Other": 45,
+        "Product Manager": 21,
+        "Marketing/Growth": 15,
+        "Blockchain Developer": 13,
+        "Designer": 13
+      },
+      "seniority_dist": {
+        "Mid": 94,
+        "Senior": 27,
+        "Lead": 17,
+        "Junior": 8
+      },
+      "remote_ratio": 0.0,
+      "top_countries": {
+        "USA": 118,
+        "UK": 24,
+        "Singapore": 3,
+        "UAE": 1
+      },
+      "sample_titles": [
+        "DeFi Engineer",
+        "Technical AI Product Manager",
+        "Senior Backend Engineer 100% Remote",
+        "Senior Software Engineer",
+        "SDET Mobile and DeFi"
+      ]
+    },
+    "Cluster_4": {
+      "size": 2,
+      "percentage": 0.5,
+      "top_job_types": {
+        "Security/Auditor": 1,
+        "Other": 1
+      },
+      "seniority_dist": {
+        "Mid": 2
+      },
+      "remote_ratio": 50.0,
+      "top_countries": {
+        "Remote": 1,
+        "Other": 1
+      },
+      "sample_titles": [
+        "Security Engineer – SIEM Platm Google SecOps",
+        "ASO Paid Search Manager Apple Search Ads Google Ads"
+      ]
+    }
+  }
+}

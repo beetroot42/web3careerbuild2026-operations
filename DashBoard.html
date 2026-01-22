@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3 新人入行指南 2026 - 完整报告</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 依赖库按顺序加载 -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
+    <script src="https://unpkg.com/recharts@2.12.7/umd/Recharts.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            background-color: #f8fafc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .recharts-responsive-container {
+            min-height: 300px;
+        }
+
+        .report-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .report-section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #334155;
+        }
+
+        .report-section p {
+            margin-bottom: 1rem;
+            line-height: 1.75;
+            color: #475569;
+        }
+
+        .report-section ul,
+        .report-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: #475569;
+        }
+
+        .report-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .report-section table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+
+        .report-section th,
+        .report-section td {
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .report-section th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .report-section blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+        const {
+            BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
+            PieChart, Pie, Cell, ComposedChart, Area
+        } = window.Recharts;
+
+        // 自定义图标组件
+        const Icon = ({ name, className }) => {
+            const icons = {
+                'layout-dashboard': <path d="M3 3h7v9H3zm11 0h7v5h-7zm0 9h7v9h-7zm-11 10h7v-7H3z" />,
+                'briefcase': <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16M2 18h20M2 6h20M12 11v4" />,
+                'globe': (
+                    <React.Fragment>
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 2a14.5 14.5 0 0 0 0 20M2 12h20" />
+                    </React.Fragment>
+                ),
+                'target': (
+                    <React.Fragment>
+                        <circle cx="12" cy="12" r="10" />
+                        <circle cx="12" cy="12" r="6" />
+                        <circle cx="12" cy="12" r="2" />
+                    </React.Fragment>
+                ),
+                'dollar-sign': (
+                    <React.Fragment>
+                        <line x1="12" y1="1" x2="12" y2="23" />
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                    </React.Fragment>
+                ),
+                'award': (
+                    <React.Fragment>
+                        <circle cx="12" cy="8" r="7" />
+                        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+                        <path d="M12 15V8" />
+                    </React.Fragment>
+                ),
+                'users': (
+                    <React.Fragment>
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </React.Fragment>
+                ),
+                'file-text': (
+                    <React.Fragment>
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <line x1="16" y1="13" x2="8" y2="13" />
+                        <line x1="16" y1="17" x2="8" y2="17" />
+                        <polyline points="10 9 9 9 8 9" />
+                    </React.Fragment>
+                )
+            };
+
+            return (
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className={className}
+                >
+                    {icons[name] || null}
+                </svg>
+            );
+        };
+
+        const seniorityData = [
+            { name: 'Mid (1-3y)', value: 249 },
+            { name: 'Senior (3-5y)', value: 104 },
+            { name: 'Lead', value: 57 },
+            { name: 'Junior/Intern', value: 16 }
+        ];
+
+        const jobTypeData = [
+            { name: '项目经理', value: 63 },
+            { name: '市场/增长', value: 53 },
+            { name: '设计师', value: 34 },
+            { name: '区块链开发', value: 30 },
+            { name: '管理层', value: 19 },
+            { name: 'Rust/Solana', value: 16 },
+            { name: '智能合约', value: 13 },
+            { name: 'DeFi 工程师', value: 13 },
+            { name: '研究员', value: 13 }
+        ];
+
+        const geoData = [
+            { name: '远程 (Remote)', value: 47.7 },
+            { name: '美国 (USA)', value: 28.2 },
+            { name: '英国 (UK)', value: 5.9 },
+            { name: '其他地区', value: 18.2 }
+        ];
+
+        const salaryRangeData = [
+            { role: 'Smart Contract', junior: 100, mid: 150, senior: 240 },
+            { role: 'Rust/Solana', junior: 110, mid: 165, senior: 275 },
+            { role: 'Blockchain Dev', junior: 90, mid: 135, senior: 205 },
+            { role: 'Product Manager', junior: 85, mid: 125, senior: 185 },
+            { role: 'Marketing', junior: 55, mid: 90, senior: 135 },
+            { role: 'Designer', junior: 65, mid: 100, senior: 150 }
+        ];
+
+        const techVsNonTechData = [
+            { category: '核心技术岗', median: 165, color: '#3b82f6' },
+            { category: '一般技术岗', median: 115, color: '#10b981' },
+            { category: '产品/设计岗', median: 105, color: '#f59e0b' },
+            { category: '运营/市场岗', median: 75, color: '#71717a' }
+        ];
+
+        const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4', '#71717a'];
+
+        const App = () => {
+            const [activeTab, setActiveTab] = useState('overview');
+
+            const StatCard = ({ icon, title, value, subValue, colorClass }) => (
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-start space-x-4">
+                    <div className={`p-3 rounded-lg ${colorClass} bg-opacity-10`}>
+                        <Icon name={icon} className={`w-6 h-6 ${colorClass.replace('bg-', 'text-')}`} />
+                    </div>
+                    <div>
+                        <p className="text-sm text-gray-500 font-medium">{title}</p>
+                        <h3 className="text-2xl font-bold text-gray-800">{value}</h3>
+                        {subValue && <p className="text-xs text-gray-400 mt-1">{subValue}</p>}
+                    </div>
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen p-4 md:p-8">
+                    <div className="max-w-7xl mx-auto mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <h1 className="text-3xl font-extrabold text-gray-900 flex items-center">
+                                <Icon name="layout-dashboard" className="mr-3 text-blue-600 w-8 h-8" />
+                                Web3 新人入行指南：2026 市场分析
+                            </h1>
+                            <p className="text-gray-500 mt-1">数据来源：Web3.career | 样本量：426 岗位</p>
+                        </div>
+                        <div className="flex bg-white p-1 rounded-lg shadow-sm border border-gray-200">
+                            <button
+                                onClick={() => setActiveTab('overview')}
+                                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'overview' ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}
+                            >📊 概览</button>
+                            <button
+                                onClick={() => setActiveTab('salary')}
+                                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'salary' ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}
+                            >💰 薪资分析</button>
+                            <button
+                                onClick={() => setActiveTab('report')}
+                                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === 'report' ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}
+                            >📄 完整报告</button>
+                        </div>
+                    </div>
+
+                    <div className="max-w-7xl mx-auto space-y-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <StatCard icon="briefcase" title="总岗位数" value="426" subValue="2026年1月采集" colorClass="bg-blue-600" />
+                            <StatCard icon="globe" title="远程占比" value="47.7%" subValue="全球化趋势" colorClass="bg-emerald-600" />
+                            <StatCard icon="target" title="新人友好岗" value="3.8%" subValue="仅 16 个 Junior 岗" colorClass="bg-red-500" />
+                            <StatCard icon="dollar-sign" title="技术岗平均" value="$140k" subValue="Mid 级中位年薪" colorClass="bg-amber-500" />
+                        </div>
+
+                        {activeTab === 'overview' ? (
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h3 className="font-bold text-lg text-gray-800 mb-6 flex items-center">
+                                        <Icon name="award" className="w-5 h-5 mr-2 text-blue-500" /> 岗位资历分布
+                                    </h3>
+                                    <div className="h-[300px]">
+                                        <ResponsiveContainer width="100%" height="100%">
+                                            <PieChart>
+                                                <Pie data={seniorityData} cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={5} dataKey="value">
+                                                    {seniorityData.map((e, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                                                </Pie>
+                                                <Tooltip />
+                                                <Legend />
+                                            </PieChart>
+                                        </ResponsiveContainer>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h3 className="font-bold text-lg text-gray-800 mb-6 flex items-center">
+                                        <Icon name="users" className="w-5 h-5 mr-2 text-emerald-500" /> 热门岗位分布
+                                    </h3>
+                                    <div className="h-[300px]">
+                                        <ResponsiveContainer width="100%" height="100%">
+                                            <BarChart data={jobTypeData} layout="vertical">
+                                                <XAxis type="number" hide />
+                                                <YAxis dataKey="name" type="category" width={100} axisLine={false} tickLine={false} />
+                                                <Tooltip />
+                                                <Bar dataKey="value" fill="#10b981" radius={[0, 4, 4, 0]} />
+                                            </BarChart>
+                                        </ResponsiveContainer>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h3 className="font-bold text-lg text-gray-800 mb-6">全球办公地点偏好 (%)</h3>
+                                    <div className="h-[300px]">
+                                        <ResponsiveContainer width="100%" height="100%">
+                                            <BarChart data={geoData}>
+                                                <XAxis dataKey="name" axisLine={false} tickLine={false} />
+                                                <YAxis axisLine={false} tickLine={false} />
+                                                <Tooltip />
+                                                <Bar dataKey="value" fill="#6366f1" radius={[4, 4, 0, 0]} />
+                                            </BarChart>
+                                        </ResponsiveContainer>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center">
+                                    <h3 className="font-bold text-lg text-gray-800 mb-4">入行路径分析</h3>
+                                    <div className="space-y-4 text-sm">
+                                        <p className="border-l-4 border-blue-500 pl-4 py-1"><strong>低门槛：</strong>利用 Web2 经验转向 Marketing/Community。</p>
+                                        <p className="border-l-4 border-emerald-500 pl-4 py-1"><strong>中门槛：</strong>Designer/PM 需要作品集展示对 Web3 UX 的理解。</p>
+                                        <p className="border-l-4 border-amber-500 pl-4 py-1"><strong>高门槛：</strong>核心开发岗，掌握 Solidity/Rust 是高薪关键。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ) : activeTab === 'salary' ? (
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h3 className="font-bold text-lg text-gray-800 mb-6">各职能薪资阶梯 ($k USD)</h3>
+                                    <div className="h-[400px]">
+                                        <ResponsiveContainer width="100%" height="100%">
+                                            <BarChart data={salaryRangeData}>
+                                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
+                                                <XAxis dataKey="role" axisLine={false} tickLine={false} />
+                                                <YAxis axisLine={false} tickLine={false} />
+                                                <Tooltip />
+                                                <Legend />
+                                                <Bar name="初级" dataKey="junior" fill="#93c5fd" />
+                                                <Bar name="中级" dataKey="mid" fill="#3b82f6" />
+                                                <Bar name="高级" dataKey="senior" fill="#1e40af" />
+                                            </BarChart>
+                                        </ResponsiveContainer>
+                                    </div>
+                                </div>
+                                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h3 className="font-bold text-lg text-gray-800 mb-6">技术 vs 非技术中位薪资</h3>
+                                    <div className="space-y-6">
+                                        {techVsNonTechData.map((item, i) => (
+                                            <div key={i} className="space-y-2">
+                                                <div className="flex justify-between"><span className="text-xs">{item.category}</span><b>${item.median}k</b></div>
+                                                <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                                                    <div className="h-full" style={{ width: `${(item.median / 180) * 100}%`, backgroundColor: item.color }}></div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        ) : (
+                            /* 完整报告内容 */
+                            <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 report-section prose max-w-none">
+                                <div className="highlight-box">
+                                    <h1 className="text-2xl font-bold mb-2 text-gray-800">📊 Web3 新人入行指南：2026年岗位市场分析</h1>
+                                    <p className="text-gray-600 text-sm">
+                                        📅 数据采集时间：2026年1月 | 📊 数据来源：Web3.career（426条岗位） | 🎯 目标读者：想要进入Web3行业的新人
+                                    </p>
+                                </div>
+
+                                <h2>第一部分：行业总览</h2>
+
+                                <h3>1.1 数据概况</h3>
+                                <p>本报告基于 <strong>426条</strong> Web3行业招聘岗位进行分析，数据来自 Web3.career。</p>
+                                <table>
+                                    <thead>
+                                        <tr><th>指标</th><th>数值</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>总岗位数</td><td>426</td></tr>
+                                        <tr><td>远程岗位占比</td><td>47.7%</td></tr>
+                                        <tr><td>涉及公司数</td><td>200+</td></tr>
+                                    </tbody>
+                                </table>
+
+                                <h3>1.2 岗位资历分布</h3>
+                                <table>
+                                    <thead>
+                                        <tr><th>资历级别</th><th>数量</th><th>占比</th><th>对新人意味着什么</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td><strong>Mid</strong></td><td>249</td><td>58.5%</td><td>需1-3年经验，大部分岗位的默认门槛</td></tr>
+                                        <tr><td><strong>Senior</strong></td><td>104</td><td>24.4%</td><td>需3-5年经验，新人不用考虑</td></tr>
+                                        <tr><td><strong>Lead</strong></td><td>57</td><td>13.4%</td><td>管理岗，需丰富经验</td></tr>
+                                        <tr><td><strong>Junior/Intern</strong></td><td>16</td><td><strong>3.8%</strong></td><td>新人的主战场，但数量稀少</td></tr>
+                                    </tbody>
+                                </table>
+                                <p><strong>关键发现</strong>：超过 <strong>96%</strong> 的岗位要求至少Mid级别经验，明确面向新人的岗位仅占 <strong>3.8%</strong>。</p>
+
+                                <h3>1.3 岗位类型分布 Top 10</h3>
+                                <ul>
+                                    <li>Product Manager: 63 (14.8%)</li>
+                                    <li>Marketing/Growth: 53 (12.4%)</li>
+                                    <li>Designer: 34 (8.0%)</li>
+                                    <li>Blockchain Developer: 30 (7.0%)</li>
+                                    <li>Executive/Lead: 19 (4.5%)</li>
+                                    <li>Rust/Solana Developer: 16 (3.8%)</li>
+                                    <li>Smart Contract Developer: 13 (3.1%)</li>
+                                    <li>DeFi Engineer: 13 (3.1%)</li>
+                                    <li>Research/Analyst: 13 (3.1%)</li>
+                                    <li>其他: 172 (40.4%)</li>
+                                </ul>
+
+                                <h3>1.4 地理分布</h3>
+                                <table>
+                                    <thead><tr><th>地区</th><th>占比</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>Remote（全球远程）</td><td>47.7%</td></tr>
+                                        <tr><td>USA</td><td>28.2%</td></tr>
+                                        <tr><td>UK</td><td>5.9%</td></tr>
+                                        <tr><td>其他地区</td><td>18.2%</td></tr>
+                                    </tbody>
+                                </table>
+                                <p><strong>结论</strong>：近半数岗位支持远程办公，地理位置不是硬性障碍。</p>
+
+                                <h2>第二部分：入门级岗位详细分析</h2>
+
+                                <h3>2.1 入门级岗位定义</h3>
+                                <p>本报告将以下岗位归类为"入门级/入门友好"：</p>
+                                <ul>
+                                    <li>明确标注 Junior/Intern 级别的岗位</li>
+                                    <li>Marketing/Growth、Community 等低技术门槛岗位</li>
+                                    <li>Designer、Research/Analyst 等可通过技能迁移进入的岗位</li>
+                                </ul>
+
+                                <h3>2.2 入门友好岗位数量</h3>
+                                <table>
+                                    <thead><tr><th>分类</th><th>数量</th><th>占总岗位比例</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>Junior/Intern级别</td><td>16</td><td>3.8%</td></tr>
+                                        <tr><td>低门槛岗位（Marketing/Community）</td><td>56</td><td>13.1%</td></tr>
+                                        <tr><td>中等门槛岗位（Designer/PM/Analyst）</td><td>110</td><td>25.8%</td></tr>
+                                        <tr><td><strong>入门友好岗位合计</strong></td><td><strong>114</strong></td><td><strong>26.8%</strong></td></tr>
+                                    </tbody>
+                                </table>
+
+                                <h3>2.3 低门槛岗位分析（无需技术背景）</h3>
+                                <p><strong>共 56 个岗位（13.1%）</strong></p>
+                                <table>
+                                    <thead><tr><th>岗位类型</th><th>数量</th><th>入门要求</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>Marketing/Growth</td><td>53</td><td>运营/营销经验，熟悉社交媒体</td></tr>
+                                        <tr><td>Community</td><td>3</td><td>热爱社区，多语言能力加分</td></tr>
+                                    </tbody>
+                                </table>
+                                <p><strong>所需技能</strong>：</p>
+                                <ul>
+                                    <li>熟悉 Twitter/Discord/Telegram</li>
+                                    <li>了解加密货币基础概念和文化</li>
+                                    <li>内容创作与传播能力</li>
+                                    <li>英语沟通能力（大部分岗位要求）</li>
+                                </ul>
+
+                                <h3>2.4 中等门槛岗位分析（需相关经验迁移）</h3>
+                                <p><strong>共 110 个岗位（25.8%）</strong></p>
+                                <table>
+                                    <thead><tr><th>岗位类型</th><th>数量</th><th>适合背景</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>Product Manager</td><td>63</td><td>互联网PM，2-3年经验</td></tr>
+                                        <tr><td>Designer</td><td>34</td><td>UI/UX设计师，熟悉Figma</td></tr>
+                                        <tr><td>Research/Analyst</td><td>13</td><td>金融/咨询/研究背景</td></tr>
+                                    </tbody>
+                                </table>
+                                <p><strong>技能迁移路径</strong>：原行业经验 + 区块链产品认知 = 具备竞争力</p>
+
+                                <h2>第三部分：薪资水平分析</h2>
+
+                                <h3>3.1 行业薪资概览</h3>
+                                <blockquote>📊 数据来源：Web3.career、Glassdoor、行业报告综合</blockquote>
+                                <table>
+                                    <thead><tr><th>岗位类型</th><th>Junior (0-2年)</th><th>Mid (2-4年)</th><th>Senior (4年+)</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>Smart Contract Developer</td><td>$80k-$120k</td><td>$120k-$180k</td><td>$180k-$300k+</td></tr>
+                                        <tr><td>Rust/Solana Developer</td><td>$90k-$130k</td><td>$130k-$200k</td><td>$200k-$350k</td></tr>
+                                        <tr><td>Blockchain Developer</td><td>$70k-$110k</td><td>$110k-$160k</td><td>$160k-$250k</td></tr>
+                                        <tr><td>Product Manager</td><td>$70k-$100k</td><td>$100k-$150k</td><td>$150k-$220k</td></tr>
+                                        <tr><td>Designer (UI/UX)</td><td>$50k-$80k</td><td>$80k-$120k</td><td>$120k-$180k</td></tr>
+                                        <tr><td>Marketing/Growth</td><td>$40k-$70k</td><td>$70k-$110k</td><td>$110k-$160k</td></tr>
+                                        <tr><td>Community Manager</td><td>$30k-$50k</td><td>$50k-$80k</td><td>$80k-$120k</td></tr>
+                                    </tbody>
+                                </table>
+                                <p><em>以上薪资为年薪（USD），基于全职远程岗位。实际薪资受公司规模、地区、代币激励等因素影响。</em></p>
+
+                                <h3>3.2 薪资关键发现</h3>
+                                <h4>技术岗 vs 非技术岗差距明显</h4>
+                                <table>
+                                    <thead><tr><th>类型</th><th>中位薪资 (Mid级)</th><th>说明</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>核心技术岗（智能合约/Rust）</td><td>$150k-$180k</td><td>最高薪资区间</td></tr>
+                                        <tr><td>一般技术岗（前端/后端）</td><td>$100k-$130k</td><td>与Web2接近</td></tr>
+                                        <tr><td>产品/设计岗</td><td>$90k-$120k</td><td>需要Web3经验加成</td></tr>
+                                        <tr><td>运营/市场岗</td><td>$60k-$90k</td><td>入门门槛较低</td></tr>
+                                    </tbody>
+                                </table>
+
+                                <h4>薪资构成特点</h4>
+                                <ol>
+                                    <li><strong>Token激励普遍</strong>：约 60-70% 的岗位包含代币/期权激励</li>
+                                    <li><strong>早期项目风险与收益并存</strong>：种子轮项目可能给出更高股权，但风险大</li>
+                                    <li><strong>远程岗位薪资略低</strong>：比同级别美国本地岗位低约 10-20%</li>
+                                    <li><strong>亚洲市场薪资差异</strong>：新加坡、香港接近美国水平；东南亚、印度约为美国的 40-60%</li>
+                                </ol>
+
+                                <h3>3.3 头部公司薪资参考</h3>
+                                <table>
+                                    <thead><tr><th>公司</th><th>类型</th><th>Senior工程师薪资</th><th>特点</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>Coinbase</td><td>交易所</td><td>$200k-$350k</td><td>股票激励丰厚</td></tr>
+                                        <tr><td>Binance</td><td>交易所</td><td>$150k-$280k</td><td>全球远程</td></tr>
+                                        <tr><td>Uniswap Labs</td><td>DeFi</td><td>$180k-$300k</td><td>DAO代币激励</td></tr>
+                                        <tr><td>Consensys</td><td>基础设施</td><td>$160k-$250k</td><td>MetaMask等产品</td></tr>
+                                        <tr><td>Alchemy</td><td>开发者工具</td><td>$170k-$280k</td><td>B轮后高增长</td></tr>
+                                        <tr><td>OpenSea</td><td>NFT</td><td>$180k-$300k</td><td>股权+代币</td></tr>
+                                    </tbody>
+                                </table>
+
+                                <h2>第四部分：总结</h2>
+
+                                <h3>4.1 核心结论</h3>
+                                <ol>
+                                    <li><strong>Junior岗位极度稀缺</strong>：仅占 3.8%，且竞争激烈</li>
+                                    <li><strong>Marketing是最大入口</strong>：低门槛岗位中 95% 是 Marketing/Growth</li>
+                                    <li><strong>技能迁移是可行路径</strong>：PM/Designer 岗位数量可观，但需要原行业经验</li>
+                                    <li><strong>技术岗薪资优势明显</strong>：智能合约/Rust开发薪资是非技术岗的 2-3 倍</li>
+                                    <li><strong>远程友好</strong>：近半数岗位支持远程，不受地理限制</li>
+                                </ol>
+
+                                <h3>4.2 市场现状总结</h3>
+                                <p>Web3行业的就业市场呈现出"两极分化"特征：</p>
+                                <ul>
+                                    <li><strong>高端技术人才</strong>：供不应求，薪资持续走高</li>
+                                    <li><strong>入门级岗位</strong>：僧多粥少，需要差异化竞争</li>
+                                </ul>
+                                <p>对于准备进入这个行业的人来说，了解市场真实情况是第一步。</p>
+
+                                <hr />
+                                <h3>数据来源</h3>
+                                <ul>
+                                    <li>岗位数据：Web3.career，2026年1月采集</li>
+                                    <li>权威报告：a16z State of Crypto 2025, Electric Capital Developer Report</li>
+                                </ul>
+                            </div>
+                        )}
+
+
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>

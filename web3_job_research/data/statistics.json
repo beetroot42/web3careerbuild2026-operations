@@ -1,0 +1,50 @@
+{
+  "total_jobs": 426,
+  "merged_at": "2026-01-22T13:52:37.273147",
+  "by_source": {
+    "web3.career": 426
+  },
+  "by_job_type": {
+    "Other": 114,
+    "Product Manager": 63,
+    "Marketing/Growth": 53,
+    "Designer": 34,
+    "Blockchain Developer": 30,
+    "Executive/Lead": 19,
+    "Rust/Solana Developer": 16,
+    "Smart Contract Developer": 13,
+    "DeFi Engineer": 13,
+    "Research/Analyst": 13,
+    "Backend Developer": 11,
+    "Data/AI": 11,
+    "Frontend Developer": 7,
+    "Compliance/Legal": 7,
+    "Full Stack Developer": 7,
+    "Security/Auditor": 6,
+    "QA/Testing": 3,
+    "DevOps/Infrastructure": 3,
+    "Community": 3
+  },
+  "by_seniority": {
+    "Mid": 249,
+    "Senior": 104,
+    "Lead": 57,
+    "Junior": 16
+  },
+  "by_country": {
+    "Remote": 203,
+    "USA": 120,
+    "Other": 54,
+    "UK": 25,
+    "India": 4,
+    "Brazil": 4,
+    "Canada": 4,
+    "Hong Kong": 3,
+    "Japan": 3,
+    "Singapore": 3,
+    "UAE": 1,
+    "France": 1,
+    "Switzerland": 1
+  },
+  "remote_ratio": 47.7
+}

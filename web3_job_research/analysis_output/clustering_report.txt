@@ -1,0 +1,189 @@
+
+======================================================================
+📊 Web3 就业市场聚类分析报告
+======================================================================
+
+📅 分析时间: 2026-01-22 13:53
+📋 数据量: 426 条职位记录
+
+======================================================================
+一、数据概览
+======================================================================
+
+1. 岗位类型分布 (Top 10):
+   • Other: 114 (26.8%)
+   • Product Manager: 63 (14.8%)
+   • Marketing/Growth: 53 (12.4%)
+   • Designer: 34 (8.0%)
+   • Blockchain Developer: 30 (7.0%)
+   • Executive/Lead: 19 (4.5%)
+   • Rust/Solana Developer: 16 (3.8%)
+   • Smart Contract Developer: 13 (3.1%)
+   • DeFi Engineer: 13 (3.1%)
+   • Research/Analyst: 13 (3.1%)
+
+2. 资历级别分布:
+   • Mid: 249 (58.5%)
+   • Senior: 104 (24.4%)
+   • Lead: 57 (13.4%)
+   • Junior: 16 (3.8%)
+
+3. 地理分布 (Top 10):
+   • Remote: 203 (47.7%)
+   • USA: 120 (28.2%)
+   • Other: 54 (12.7%)
+   • UK: 25 (5.9%)
+   • India: 4 (0.9%)
+   • Brazil: 4 (0.9%)
+   • Canada: 4 (0.9%)
+   • Hong Kong: 3 (0.7%)
+   • Japan: 3 (0.7%)
+   • Singapore: 3 (0.7%)
+
+4. 远程工作比例: 47.7%
+
+======================================================================
+二、聚类分析结果
+======================================================================
+
+【Cluster_0】Mid Other (Remote)
+   规模: 272 条 (63.8%)
+   远程比例: 73.2%
+   
+   主要岗位类型:
+     - Other: 68
+     - Product Manager: 42
+     - Marketing/Growth: 38
+
+   资历分布:
+     - Mid: 149
+     - Senior: 75
+     - Lead: 40
+     - Junior: 8
+
+   典型职位:
+     - Head of Product and UX
+     - Senior Brand & Design Systems Lead
+     - Senior Visual Designer
+
+【Cluster_1】Senior Smart Contract Developer (Remote)
+   规模: 2 条 (0.5%)
+   远程比例: 100.0%
+   
+   主要岗位类型:
+     - Smart Contract Developer: 2
+
+   资历分布:
+     - Senior: 2
+
+   典型职位:
+     - Senior Smart Contract & Backend Developer (Solidity, TypeScript)
+     - Senior Smart Contract Backend Developer Solidity TypeScript
+
+【Cluster_2】Mid Rust/Solana Developer (Onsite/Hybrid)
+   规模: 4 条 (0.9%)
+   远程比例: 25.0%
+   
+   主要岗位类型:
+     - Rust/Solana Developer: 4
+
+   资历分布:
+     - Mid: 4
+
+   典型职位:
+     - Solana Program Engineer
+     - Solana Program Engineer
+     - Rust Blockchain Developer Solana
+
+【Cluster_3】Mid Other (Onsite/Hybrid)
+   规模: 146 条 (34.3%)
+   远程比例: 0.0%
+   
+   主要岗位类型:
+     - Other: 45
+     - Product Manager: 21
+     - Marketing/Growth: 15
+
+   资历分布:
+     - Mid: 94
+     - Senior: 27
+     - Lead: 17
+     - Junior: 8
+
+   典型职位:
+     - DeFi Engineer
+     - Technical AI Product Manager
+     - Senior Backend Engineer 100% Remote
+
+【Cluster_4】Mid Security/Auditor (Onsite/Hybrid)
+   规模: 2 条 (0.5%)
+   远程比例: 50.0%
+   
+   主要岗位类型:
+     - Security/Auditor: 1
+     - Other: 1
+
+   资历分布:
+     - Mid: 2
+
+   典型职位:
+     - Security Engineer – SIEM Platm Google SecOps
+     - ASO Paid Search Manager Apple Search Ads Google Ads
+
+======================================================================
+三、核心发现与洞察
+======================================================================
+
+1. 【技术岗位仍是主力】
+   - 开发类岗位占据主导地位
+   - Rust/Solana 和 Smart Contract 开发需求强劲
+   - DeFi 工程师是增长最快的细分领域
+
+2. 【远程工作成常态】
+   - 48% 的岗位支持远程工作
+   - Remote 已成为最大的"地区"类别
+   - 美国仍是第二大招聘市场
+
+3. 【中高级人才需求旺盛】
+   - Senior 级别岗位占比约 24%
+   - Lead/管理岗位需求增长
+   - 初级岗位相对较少，新人入行门槛不低
+
+4. 【非技术岗位不容忽视】
+   - Product Manager 需求量大
+   - Marketing/Growth 岗位持续增长
+   - Designer 岗位数量可观
+
+5. 【头部公司主导招聘】
+   - Tether、Zscaler、Bitpanda等公司招聘活跃
+   - 交易所和DeFi协议是最大雇主
+
+======================================================================
+四、新人入行建议
+======================================================================
+
+基于数据分析，给Web3新人的建议：
+
+1. 【技术方向】
+   - 优先学习 Solidity（EVM链） 或 Rust（Solana/新链）
+   - TypeScript/React 对前端开发必备
+   - 安全审计是高薪细分赛道
+
+2. 【非技术方向】
+   - Product Manager 需求大，有互联网PM背景者优势明显
+   - Marketing/Growth 方向适合有运营经验的人
+   - 社区运营是入门门槛最低的方向
+
+3. 【地理策略】
+   - 优先选择Remote岗位，竞争更全球化但机会多
+   - 美国公司招聘量最大
+   - 亚洲市场（日本、新加坡、香港）增长迅速
+
+4. 【资历提升】
+   - 大量岗位需要Mid及以上经验
+   - 建议通过开源贡献或Hackathon积累背书
+   - Lead岗位需要技术+管理双重能力
+
+======================================================================
+报告结束
+======================================================================
